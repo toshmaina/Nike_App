@@ -1,17 +1,21 @@
 import { useScrollTrigger } from '@mui/material';
+
+import { BsSearch } from 'react-icons/bs';
+
 import { Classic } from "@theme-toggles/react";
 import { useTheme } from "next-themes";
 import { useCallback, useMemo, useState } from 'react';
 import { AiOutlineClose } from "react-icons/ai";
 import Fade from 'react-reveal/Fade';
 import { Link, Outlet } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { hamburger } from '../assets/icons';
 import { headerLogo } from '../assets/images';
 import { navLinks } from '../constants';
-
 const Nav = () => {
  const [isToggled, setToggle] = useState(false)
   const { theme, setTheme } = useTheme(); 
+const [showSearchInput, setShowSearchInput] = useState(false);
 
 console.log(theme);
 
@@ -28,7 +32,9 @@ console.log(theme);
   useMemo(() => isScrolling, []);
   const toggle = ():void => setToggle(toggle => !toggle); 
 
-  const changeTheme = ():void => theme === 'light' ? setTheme("dark") : setTheme("light");
+  const changeTheme = (): void => theme === 'light' ? setTheme("dark") : setTheme("light");
+  
+  const showPopUp = () =>  Swal.fire("Success!", "Item removed  from cart!");
   return (
     <>
   
@@ -72,7 +78,20 @@ console.log(theme);
                       <img src={hamburger} alt="toggle links" className='dark:bg-white' width={25} height={25} />
                     </button>
 
-           <Classic    duration={750}  toggled={isToggled}    toggle={toggle} onToggle={changeTheme } />
+                    <Classic duration={750} toggled={isToggled} toggle={toggle} onToggle={changeTheme} />
+                    <button type="button" onClick={() => {
+                      setShowSearchInput(prev => !prev);
+                      showSearchInput && showPopUp();
+                    }}>
+                       <BsSearch/>  
+                    </button>
+                    
+
+                      
+                     
+                    
+                  
+            
     
                    
           </div> 

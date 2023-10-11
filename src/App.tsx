@@ -8,6 +8,7 @@ import Layout from "./sections/Layout";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { Route, Routes } from "react-router-dom";
 //import useDarkMode from "use-dark-mode";
+import { NextUIProvider } from "@nextui-org/system";
 import loading from "./components/Loading";
 import { BackToTop, Nav, PopularProducts } from "./sections";
 
@@ -27,9 +28,10 @@ const App = () => {
   <>
     {
            !isLoading ? (
-              
+          <NextUIProvider>   
   <NextThemesProvider attribute="class" defaultTheme="dark">
           <main>
+            
                  <Nav />
                  <Routes>
                  {
@@ -41,6 +43,7 @@ const App = () => {
                
                  </main> 
                  </NextThemesProvider>
+                 </NextUIProvider> 
         ) : (
            <div id="spinner" className="flex items-center absolute top-0 right-0 justify-center w-full h-full bg-[#141728]">
         <ThreeDots 
