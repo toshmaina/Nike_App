@@ -1,6 +1,6 @@
 
 import { useRef, useState } from "react";
-import Fade from "react-reveal";
+import { Fade } from "react-reveal";
 
 import { Link } from "react-router-dom";
 import Typed from 'react-typed';
@@ -26,7 +26,7 @@ const Hero = () => {
  <Fade up  >
       
           <section className="w-full max-w-[1440px]   mx-0 my-auto     flex flex-col max-sm:justify-center  min-h-screen xl:flex-row  gap-10  ">
-      <div className="flex flex-col pt-28    items-start justify-center max-xl:w-2/5 sm:px-16  px-8 max-sm:w-[32vh]">
+      <div className="flex flex-col pt-28    items-start justify-center max-xl:w-2/5 sm:px-16  px-8 max-sm:w-[32vh] max-lg:w-[40vh]">
           <div className="flex flex-1 justify-start  items-center">
              <p className=" whitespace-nowrap  font-montserrat font-xl text-coral-red ">
            <Typed
@@ -53,7 +53,7 @@ const Hero = () => {
                <Button title="shop now" showOnSmallDevices={true} src={arrowRight} />
             </Link>
        
-                <div className="flex justify-start items-start gap-16   md:flex-nowrap flex-wrap    font-montserrat mt-14 ">
+                <div className="flex justify-start items-start gap-16   lg:flex-nowrap flex-wrap    font-montserrat mt-14 ">
           {
             statistics.map((statistic, index) => (
               <div key={index}>
@@ -66,11 +66,11 @@ const Hero = () => {
          
 
       </div>
-     <div className= "  flex items-center xl:absolute relative  right-14 mx-auto    flex-col justify-center max-xl:py-40 max-xl:my-40   max-sm:w-[32vh]  xl:min-h-screen  dark:bg-footer  bg-hero  bg-cover  bg-center  "
+     <div className= "  flex items-center xl:absolute relative   xl:right-14 2xl:right-0 mx-auto  flex-col justify-center max-xl:py-40 max-xl:my-40    max-sm:w-[32vh] max-sm:mx-auto xl:min-h-screen  dark:bg-footer  bg-hero  bg-cover  bg-center  "
          
      >
         <img src={image} alt="" width={610} height={500} className=" relative  z-10  " />
-        <div className=" flex sm:gap-4 gap-6   absolute  -bottom-[4.5%] sm:left-[5%]">{
+        <div className=" flex sm:gap-4 gap-6   absolute  -bottom-[9.5%] sm:left-[5%]">{
           shoes.map((shoe, index) => (
             <div key={index} onClick={() => handleChange(shoe.bigShoe)} className=
               {

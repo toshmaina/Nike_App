@@ -227,7 +227,7 @@ export const reviews:Reviews[] = [
     {
         imgURL: customer2,
         customerName: 'Lota Mongeskar',
-        rating: 4.5,
+        rating: 4,
         feedback: "The product not only met but exceeded my expectations. I'll definitely be a returning customer!"
     }
 ];

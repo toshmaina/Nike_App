@@ -1,21 +1,20 @@
 import { useScrollTrigger } from '@mui/material';
-
-import { BsSearch } from 'react-icons/bs';
-
 import { Classic } from "@theme-toggles/react";
 import { useTheme } from "next-themes";
 import { useCallback, useMemo, useState } from 'react';
-import { AiOutlineClose } from "react-icons/ai";
-import Fade from 'react-reveal/Fade';
+import { AiOutlineClose } from 'react-icons/ai';
+import { BsSearch } from 'react-icons/bs';
+import { Fade } from 'react-reveal';
 import { Link, Outlet } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { hamburger } from '../assets/icons';
 import { headerLogo } from '../assets/images';
 import { navLinks } from '../constants';
+
 const Nav = () => {
  const [isToggled, setToggle] = useState(false)
   const { theme, setTheme } = useTheme(); 
-const [showSearchInput, setShowSearchInput] = useState(false);
+
 
 console.log(theme);
 
@@ -34,8 +33,136 @@ console.log(theme);
 
   const changeTheme = (): void => theme === 'light' ? setTheme("dark") : setTheme("light");
   
-  const showPopUp = () =>  Swal.fire("Success!", "Item removed  from cart!");
+
+
+  const showPopUp = (): void => {
+    
+    Swal.fire(
+      {
+        
+        width: '80%',
+        input: 'text',
+        position: "top", 
+        grow: 'row',
+        showConfirmButton: false,
+        background: theme === 'dark' ? '#141728': '#fff',
+        allowEnterKey: false,
+        
+
+        
+      });
+
+  }
+  const LoopLinks = () => (
+     <div className=" min-w-[30%] mr-0  top-0 right-0 bg-footer fixed my-0 backdrop:shadow-black   z-10   h-screen   ">
+                         <div className="flex gap-10 justify-start m-5 p-2 ">
+            <button onClick={showButton} className='hidden max-lg:block w-16 h-16 '>
+             <AiOutlineClose/>
+                  </button>
+                
+          </div>
+            
+                <ul className='relative w-full last-of-type:  text-md flex flex-col items-center justify-start p-5  gap-24   font-montserrat text-[whitesmoke]  '>
+                
+         {
+ navLinks.map(link => (
+            
+                    <Link key={link.label} to={link.href}>
+                  <li >
+                 {link.label}
+                 </li>
+                    </Link>
+        
+          )
+          )
+         } 
+         
+      
+      </ul>
+
+              </div>
+    
+  )
+//   const showSideBar = () => { 
+// console.log((<LoopLinks/>));
+
+//     const sidebar = <LoopLinks />;
+//     const bar =  navLinks.map(link => (
+            
+//                     <Link key={link.label} to={link.href}>
+//                   <li >
+//                  {link.label}
+//                  </li>
+//                     </Link>
+        
+//           )
+//           )
+//     Swal.fire(
+//       {
+        
+//         width: '80%',
+//         html: `
+//            <ul className=''>   
+//            <a href='/'><li>Home</li></a>     
+//            <a><li>About</li>       
+//            <a><li>Products</li>       
+//            <a><li>Contact</li>       
+ 
+//       </ul>`
+//         ,
+//         position:"top-right",  
+//         grow: 'column',
+//         showConfirmButton: false,
+//         background: theme === 'dark' ? '#141728': '#fff',
+//         allowEnterKey: false,
+//         heightAuto:false,
+        
+        
+        
+//         customClass: {
+//           closeButton: 'text-coral-red  ', 
+//           htmlContainer: 'flex align-center flex-col  justify-between  mt-0 p-3 ',
+//           title:'hidden'
+//         } 
+        
+
+        
+//       });
+
+//   }
+
+  
   return (
+
+/* 
+     html:
+          <div className=" min-w-[30%] mr-0  top-0 right-0 bg-footer fixed my-0 backdrop:shadow-slate-gray   z-10   h-screen   ">
+                         <div className="flex gap-10 justify-start m-5 p-2 ">
+            <button onClick={showButton} className='hidden max-lg:block w-16 h-16 '>
+             <AiOutlineClose/>
+                  </button>
+                
+          </div>
+            
+                <ul className='relative w-full last-of-type:  text-md flex flex-col items-center justify-start p-5  gap-24   font-montserrat text-[whitesmoke]  '>
+             
+                  
+      {
+                  navLinks.map(link => (
+            
+                    <Link key={link.label} to={link.href}>
+                  <li >
+                 {link.label}
+                 </li>
+                    </Link>
+        
+          )
+          )
+ }
+      </ul>
+
+              </div>
+       , */
     <>
   
   <section>
@@ -73,27 +200,14 @@ console.log(theme);
          
               {
                 !show &&
- <div className="flex gap-10 justify-end m-5 p-2">
-            <button onClick={showButton} className='hidden   max-lg:block'>
-                      <img src={hamburger} alt="toggle links" className='dark:bg-white' width={25} height={25} />
-                    </button>
-
-                    <Classic duration={750} toggled={isToggled} toggle={toggle} onToggle={changeTheme} />
-                    <button type="button" onClick={() => {
-                      setShowSearchInput(prev => !prev);
-                      showSearchInput && showPopUp();
-                    }}>
+                <div className="flex gap-10 justify-end m-5 p-2">
+                     <button type="button" onClick={showPopUp} className='text-white'>
                        <BsSearch/>  
                     </button>
-                    
-
-                      
-                     
-                    
-                  
-            
-    
-                   
+                    <Classic toggled={isToggled} toggle={toggle} onToggle={changeTheme}  />
+                     <button onClick={showButton} className='hidden max-sm:block  max-lg:block bg-white '>
+                      <img src={hamburger} alt="toggle links" className='bg-white flex-1' width={25} height={25} />
+                    </button>          
           </div> 
      }
               
@@ -111,16 +225,20 @@ console.log(theme);
             </Fade> 
            
       {
-            show &&   (
+          show && (
+              <></>
+            
+            /*
+            
 <Fade  right={show}  >
               
 
-              <div className=" min-w-[25%] mr-0  top-0 right-0 bg-footer fixed my-0    z-10   h-screen   ">
+              <div className=" min-w-[30%] mr-0  top-0 right-0 bg-footer fixed my-0 backdrop:shadow-slate-gray   z-10   h-screen   ">
                          <div className="flex gap-10 justify-start m-5 p-2 ">
             <button onClick={showButton} className='hidden max-lg:block w-16 h-16 '>
              <AiOutlineClose/>
                   </button>
-                  <Classic    duration={750}  toggled={isToggled}    toggle={toggle} onToggle={changeTheme } />
+                
           </div>
             
                 <ul className='relative w-full last-of-type:  text-md flex flex-col items-center justify-start p-5  gap-24   font-montserrat text-[whitesmoke]  '>
@@ -141,7 +259,7 @@ console.log(theme);
       </ul>
 
               </div>
-              </Fade>
+              </Fade> */
 
             )
               } 

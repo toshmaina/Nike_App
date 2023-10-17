@@ -1,7 +1,7 @@
 
+import { CarouselProvider, Slide, Slider } from 'pure-react-carousel';
 import Fade from 'react-reveal/Fade';
 import ReviewCard from "../components/ReviewCard";
-import { reviews } from "../constants";
  
 
 
@@ -12,23 +12,39 @@ const CustomersReviews = (): JSX.Element => (
         <Fade up>
           <h3 className="mx-auto font-palanquin font-bold text-4xl text-center">What our <span className="text-coral-red">Customers</span> Say?</h3>
           <p className="max-w-lg font-montserrat text-center   text-lg leading-7 text-slate-gray  mt-4 mx-auto "> Hear genuine stories from our satisfied Customers about their exceptional experiences with us</p>
-        </Fade>
+      </Fade>
+      
+             <CarouselProvider
+          naturalSlideHeight={20}
+          naturalSlideWidth={20}
+          totalSlides={2}
+        
+        >
 
-        {/*  <div className="mt-24 flex flex-1 justify-evenly items-center max-lg:flex-col gap-14"> */}
-        <div className="flex flex-1 justify-around  gap-0 items-center max-lg:flex-col  mt-24">
+      <div className="flex flex-1 justify-around  gap-0 items-center max-lg:flex-col  mt-24">
+ 
 
-          {
-            reviews.map((review, index) => (                          
-  <> 
-              {/* <CarouselComponent cssClass="templateCarousel" animationEffect="Fade" buttonsVisibility="Visible" /* indicatorsTemplate={indicatorTemplate} */ /* previousButtonTemplate={} nextButtonTemplate={} */
-               } 
-                    <ReviewCard key={index} feedback={review.feedback} customerName={review.customerName} imgURL={review.imgURL} 
-                  />
-               </>   
+          
 
-            ))}
-  
+            
+        {
+         <Slider>
+            reviews.map((review, index) => (  
+           
+               <Slide index={index}>
+                    <ReviewCard key={index} rating={review.rating} feedback={review.feedback} customerName={review.customerName} imgURL={review.imgURL} 
+                  />            
+                </Slide>
+            
+
+            ))
+            </Slider>
+            }
+              
+         
+         
         </div>
+         </CarouselProvider>
               
       </section>
     </section>

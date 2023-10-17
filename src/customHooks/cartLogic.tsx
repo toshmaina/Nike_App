@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import { useReducer } from "react";
 import Swal from "sweetalert2";
 
@@ -21,6 +22,7 @@ import Swal from "sweetalert2";
 
 
 const cartLogic = () => {
+  const theme = useTheme()
 
   const itemsInCart: Array<ItemInCart> = []
 
@@ -76,7 +78,11 @@ const cartLogic = () => {
       type: Actions.REMOVE_ITEM_FROM_CART,
       item: { id: id, name: name, imgURL: imgURL },
     })
-    Swal.fire("Success!", "Item removed  from cart!", "success");
+    Swal.fire(
+    "Success!",
+      "Item removed  from cart!",
+      "success"
+    );
     
     
 
@@ -87,7 +93,15 @@ const cartLogic = () => {
       type: Actions.ADD_ITEM_INTO_CART,
       item: { id: id, name: name, imgURL: imgURL }
     });
-    Swal.fire("Success!", "Item added into cart!", "success");
+    Swal.fire({
+       title: ' success',
+       text: 'Item added into cart!!',
+      timer: 1000,
+      icon: 'success',
+      backdrop: true,
+      background: theme === 'dark' ? '#141728': '#fff',
+    }
+    );
     
 console.log(state.length);
 
