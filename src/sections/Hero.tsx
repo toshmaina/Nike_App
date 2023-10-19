@@ -30,7 +30,7 @@ const Hero = () => {
           <div className="flex flex-1 justify-start  items-center">
              <p className=" whitespace-nowrap  font-montserrat font-xl text-coral-red ">
            <Typed
-            strings={[' Our Summer Collections']}
+            strings={[' Our Festive  Collections🎇✨']}
             typeSpeed={40}
            backSpeed={50}
            loop

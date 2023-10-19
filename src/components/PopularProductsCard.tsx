@@ -15,7 +15,7 @@ const PopularProductsCard = ({ imgURL, name, price,id }: Prducts) => {
   //const hover = useHover<HTMLImageElement>(imageRef)
   return (
     <div className="flex flex-1 flex-col w-full max-sm:w-full max-sm:justify-center max-sm:items-center">
-       < img ref={imageRef} src={imgURL} alt={name} className=" w-[280px] h-[280px] bg-black bg-cover bg-center bg-hero    opacity-100  flex items-center justify-center"/>
+       < img ref={imageRef} src={imgURL} alt={name} className=" w-[280px] h-[280px] bg-black bg-cover bg-center    opacity-100  flex items-center justify-center"/>
     <div className="mt-8 flex flex-col justify-start gap-2.5">
         <Rating precision={0.5} value={rating} onChange={(_, value) => setRating(value!)} /> 
         {rating !== null && rating >= 2.5  &&  <Confetti recycle={false} gravity={0.5} numberOfPieces={500}  />}
