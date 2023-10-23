@@ -7,7 +7,7 @@ const AllComponents = () => {
 
   return (
   <>
-       {
+      {/*  {
        !loading ? (
           <main >
             
@@ -32,7 +32,7 @@ const AllComponents = () => {
  )
 }
 
-   
+    */}
    
 </>
   );

@@ -3,10 +3,11 @@ import { ButtonBack, ButtonNext, CarouselProvider, Slide, Slider } from 'pure-re
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import Fade from 'react-reveal/Fade';
+import { getProducts } from '../api/axiosApi';
 import ReviewCard from "../components/ReviewCard";
-import { reviews } from '../constants';
+import { Reviews } from '../constants';
 
- 
+ const reviews = await getProducts<Reviews>("reviews");
 
 
 const CustomersReviews = (): JSX.Element => (
@@ -41,16 +42,18 @@ const CustomersReviews = (): JSX.Element => (
            <Slider> 
           {
            
-            reviews.map((review, index) => (  
+              reviews.map((review, index) => {
+                 const dynamicImgURL: string = new URL(`../assets/images/${review.imgURL}`, import.meta.url).href; 
+                return (  
            <>
                <Slide index={index}>
 
-                    <ReviewCard key={index} rating={review.rating} feedback={review.feedback} customerName={review.customerName} imgURL={review.imgURL} 
+                      <ReviewCard key={index} rating={review.rating} feedback={review.feedback} customerName={review.customerName} imgURL={dynamicImgURL} 
                   />            
                 </Slide>
      
 </>
-              ))
+              )})
              
           
             }

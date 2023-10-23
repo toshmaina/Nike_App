@@ -1,16 +1,17 @@
 
+import { useContext } from "react";
+import { CartContext, CartContextType } from "../App";
+import Add_to_Cart from "../assets/images/Add_to_Cart.gif";
 import CartCard from "../components/CartCard";
-import { products } from "../constants";
-import cartLogic from "../customHooks/cartLogic";
 import Products from './Products';
-export const  numberOfItemsInCart = products.length;
 
 
 
 const Cart = () => {
-  const { state } = cartLogic();
- 
-  const totalItemsInCart   = state.length;
+  
+const {itemsInCart,totalItemsInCart}:CartContextType = useContext(CartContext)!
+
+
 
   return (
     <section className=" relative">
@@ -39,21 +40,25 @@ const Cart = () => {
                 CART
               </h3>
               <div className="font-montserrat">
-                ({totalItemsInCart } )
+                (  {totalItemsInCart }   )
               </div>
             </div>
             {
-         state.map((product,index) => (
+       itemsInCart.length ?  itemsInCart.map((product,index) => (
               <CartCard
                   key={index}
                   imgURL={product.imgURL}
                   name={product.name}
                   id={product.id}
-                  index={index}
+           index={index}
+           price={product.price}
+             
+         
                   
                   
                  />
-              ))
+       ))
+                :<img src={Add_to_Cart} height={500} width={500} />
             }
            
 
@@ -61,7 +66,7 @@ const Cart = () => {
 
           
           <section>
-            <Products showProductsOnly={true}/>
+            <Products  showProductsOnly={true}/>
         </section>
 
           

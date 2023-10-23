@@ -1,22 +1,15 @@
 import { Link } from "react-router-dom";
+import { getProducts } from "../api/axiosApi";
 import { footerLogo } from "../assets/images";
-import { footerLinks, socialMedia } from "../constants";
+import { FooterLinks, SocialMedia } from "../constants";
 
-
+/* const footerLinks = await getProducts<FooterLinks>("footerLinks");
+const socialMedia = await getProducts<SocialMedia>("socialMedia"); */
+const [footerLinks, socialMedia] = await  Promise.all([getProducts<FooterLinks>("footLinks"), getProducts<SocialMedia>("socialMedia")]);
 const Footer = () => {
   return (
 
-/* 
-      <Wave fill='#f79902'
-        paused={false}
-     
-        options={{
-          height: 20,
-          amplitude: 50,
-          speed: 0.15,
-          points: 3
-        }}
-  > */
+
       
   <section className=' bg-footer bg-cover bg-center bg-no-repeat sm:px-16 px-8 pb-8 sm:pt-24 pt-12' id='contact-us'>
       
@@ -29,20 +22,25 @@ const Footer = () => {
           </a>
           <p className="mt-6 text-base font-montserrat text-white-400 sm:max-w-sm ">Get shoes ready for the new term at your nearest Nike store .Find Your perfect Size In the Store . Get Rewards </p>
               <div className="flex flex-1 items-center mt-8 gap-5 ">
-        {socialMedia.map(icon => (
+              {socialMedia.map(icon => {
+                            const dynamicImgURL:string = new URL(`../assets/icons/${icon.src}`, import.meta.url ).href
+
+                return (
           <div key={icon.src} className="flex justify-center items-center w-12 h-12 bg-white rounded-full">
-            <img src={icon.src} alt={icon.alt} width={24} height={24} />
+                    <img src={dynamicImgURL } alt={icon.alt} width={24} height={24} />
         </div>
          
-        ))}
+        )})}
       </div>
         </div>
         <div className="flex flex-1 justify-between lg:gap-10 gap-20 flex-wrap">
-          {footerLinks.map(footLink => (
+            {
+              footerLinks.map(footLink => (
             <div key={footLink.title} className="text-white ">
               <h4 className="text-white text-2xl font-montserrat leading-normal font-medium mb-6 ">{footLink.title}</h4>
            <ul>   
-              {footLink.links.map(link => (
+                    {
+                      footLink?.links?.map(link => (
                 
                 <li key={link.name} className="text-white mt-3  font-medium leading-normal font-montserrat text-base hover:text-slate-gray cursor-pointer ">
                   <Link to={link.link}>{link.name}</Link>

@@ -1,27 +1,30 @@
-import { useScrollTrigger } from '@mui/material';
+
+import { Tooltip, useScrollTrigger } from '@mui/material';
 import { Classic } from "@theme-toggles/react";
+import "@theme-toggles/react/css/Classic.css";
 import { useTheme } from "next-themes";
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
+import { fromLatLng } from "react-geocode";
 import { AiOutlineClose } from 'react-icons/ai';
-import { BsSearch } from 'react-icons/bs';
+import { BsFillCartPlusFill, BsPinMapFill, BsSearch } from 'react-icons/bs';
 import { Fade } from 'react-reveal';
 import { Link, Outlet } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { CartContext } from '../App';
+import { getProducts } from '../api/axiosApi';
 import { hamburger } from '../assets/icons';
 import { headerLogo } from '../assets/images';
-import { navLinks } from '../constants';
+import { Navlinks, navLinks } from '../constants';
+
+const navigationLinks = await getProducts<Navlinks>("navLinks");
 
 const Nav = () => {
  const [isToggled, setToggle] = useState(false)
   const { theme, setTheme } = useTheme(); 
 
+  const [show, setShow] = useState<boolean>(false)
 
-console.log(theme);
-
-  
- const [show, setShow] = useState<boolean>(false)
-
-
+  const { totalItemsInCart: itemCount } = useContext(CartContext)!;
  const showButton = useCallback(() => {
    setShow(show => !show)
  }, [show]);
@@ -53,6 +56,23 @@ console.log(theme);
       });
 
   };
+
+
+
+  const getAddress =  () => {
+    //     console.log(navigator.onLine);
+    //     const place = navigator.onLine &&   navigator.geolocation.getCurrentPosition(position =>  [position.coords.latitude, position.coords.longitude] );
+    // console.log(place);
+
+    //     const results = await  
+     fromLatLng(48.8583701, 2.2922926)
+     .then(({ results }) => {
+      const { lat, lng } = results[0].geometry.location;
+      console.log(lat, lng);
+    })
+    .catch(console.error); 
+    } 
+  
   return (
 
     <>
@@ -63,20 +83,24 @@ console.log(theme);
          
      
     <nav className='max-w-[1440px] my-0 mx-auto flex items-center justify-between  '>
-      <a   className="" href="/">
-      <img
+              <a className="" href="/">
+             
+                   <img
         src={headerLogo}
         alt="nike logo"
         width={130}
               height={28} />
+
+             
+     
           
 
       </a>
     <ul className={`flex-1 flex items-center justify-evenly max-lg:hidden  font-montserrat leading-normal ${ !isScrolling ? `text-slate-gray`:`text-white`} dark:text-white` }>
         {
-                navLinks.map(link => ( 
+                navigationLinks.map(link => ( 
                   <li key={link.label}className='relative' >
-                    <Link to={link.href} className=" after:absolute after:transition after:content-[''] after:xl:bg-white after:bg-coral-red   after:h-[3px] after:w-full after:rounded-md after:left-0 after:-bottom-1 after:opacity-0 after:hover:opacity-100 ">{link.label}</Link> 
+                    <Link to={link.href} className= "after:absolute after:transition after:content-[''] after:xl:bg-white after:bg-coral-red   after:h-[3px] after:w-full after:rounded-md after:left-0 after:-bottom-1 after:opacity-0 after:hover:opacity-100">{link.label}</Link> 
                   </li>
           )
               )
@@ -91,13 +115,23 @@ console.log(theme);
               {
                 !show &&
                 <div className="flex gap-10 justify-end m-5 p-2">
+                    <Tooltip title="search" arrow>
                      <button type="button" onClick={showPopUp} className='text-white'>
                        <BsSearch/>  
+                      </button>
+                    </Tooltip>  
+                       <button  className={`${!isScrolling && theme === 'light' ? 'text-purple-900 ': 'text-coral-red'  } relative `}>
+                     <Link to="/cart" className={` ${itemCount ? 'after:absolute':'after:hidden'}    after:content-['6'] after:bottom-2.5 after:left-3  after:w-[24px]  after:bg-coral-red  after:rounded-full    flex items-center justify-center`}><BsFillCartPlusFill/> </Link> 
                     </button>
-                    <Classic toggled={isToggled} toggle={toggle} onToggle={changeTheme}  />
-                     <button onClick={showButton} className='hidden max-sm:block  max-lg:block bg-white '>
+                    <Classic className={ `${!isScrolling && theme === 'light' ? 'text-purple-900': 'text-white'  } `} reversed toggled={isToggled} toggle={toggle} onToggle={changeTheme} /> 
+                     <button onClick={getAddress} className={`${!isScrolling && theme === 'light' ? 'text-purple-900 ': 'text-white'  } `}>
+                      <BsPinMapFill/>
+                    </button>
+                  
+                     <button onClick={showButton} className='hidden max-lg:block bg-white '>
                       <img src={hamburger} alt="toggle links" className='bg-white flex-1' width={25} height={25} />
-                    </button>          
+                    </button>
+                   
           </div> 
      }
               

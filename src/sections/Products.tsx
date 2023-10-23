@@ -1,14 +1,23 @@
 import Fade from 'react-reveal/Fade';
 import Typed from 'react-typed';
 import PopularProductsCard from '../components/PopularProductsCard';
-import { products } from '../constants';
+
+import { getProducts } from '../api/axiosApi';
+import { Prducts } from '../constants';
 
 
 interface ProductsOnly{
      showProductsOnly?: boolean;
      id?: number;
+    
 }
-const Products = ({ showProductsOnly }: ProductsOnly) => (
+
+     const products = await  getProducts<Prducts>('products');
+
+const Products = ({ showProductsOnly }: ProductsOnly) => {
+
+    
+     return (
 
      <section className='max-w-[1440px] my-0 mx-auto max-sm:mt-12 sm:px-16 px-8 py-[8rem] max-sm:py-24' id=''> 
           <section className="max-w-[1440px] my-0 mx-auto max-sm:mt-12 ">
@@ -57,11 +66,13 @@ const Products = ({ showProductsOnly }: ProductsOnly) => (
                  <Fade up >
      <div className={` grid ${showProductsOnly ? `lg:grid-cols-2  md:grid-cols-3 sm:grid-cols-2 my-0 mx-auto  p-5   grid-cols-1`:` mt-16  lg:grid-cols-4 md-grid-cols-3 sm:grid-cols-2 grid-cols-1`} sm:gap-4 gap-14`}>
   { 
-          products.map(product => (
+                                   products?.map(product => {
+                                        const dynamicImgURL: string = new URL(`../assets/images/${product.imgURL}`, import.meta.url).href; 
+               return (
       <div key={product.name} className=' flex max-sm:justify-center max-sm:items-center  '>
- <PopularProductsCard id={product.id}  imgURL={product.imgURL} name={product.name} price={product.price}/>
+ <PopularProductsCard id={product.id}  imgURL={dynamicImgURL} name={product.name} price={product.price}/>
       </div>
- ))
+ )})
       }       
 </div>
       </Fade>
@@ -70,7 +81,7 @@ const Products = ({ showProductsOnly }: ProductsOnly) => (
     </section>
     
 </section>
-)
+)}
   
 
 

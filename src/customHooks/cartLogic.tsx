@@ -2,10 +2,12 @@ import { useTheme } from "@emotion/react";
 import { useReducer } from "react";
 import Swal from "sweetalert2";
 
+
   interface ItemInCart  {
     name: string;
     id: number;
-    imgURL : string;
+    imgURL: string;
+   
   };
 
   enum Actions {
@@ -24,53 +26,57 @@ import Swal from "sweetalert2";
 const cartLogic = () => {
   const theme = useTheme()
 
-  const itemsInCart: Array<ItemInCart> = []
+  type itemsInCartType = {
+    cart: Array<ItemInCart>
+  }
+ 
+  const initCartState:itemsInCartType = {cart: []}
 
-  const reducer = (state: Array<ItemInCart>, actions: ActionsType): Array<ItemInCart> => {
+  const reducer = (state: itemsInCartType, actions: ActionsType): itemsInCartType => {
     const { type,item } = actions;
-    const { id } = item;
+   
+    const { cart } = state;
+  const {id} = item
     
+   
 
-    
-    const itemToBeAdded: ItemInCart = item;
-    //console.log(itemToBeAdded);
-    
+    const filteredCart: Array<ItemInCart> = cart.length ? cart.filter(item => item.id !== id) : cart;
   
-    const itemsLeftInCart = state.filter(({id}) => id !== id);
-      //console.log(itemsLeftInCart);
       
-    
-        
-    //const itemAddedDoesNotExist:boolean = !state.includes(itemToBeAdded);
+    const itemAddedDoesNotExist: boolean = !cart.includes(item);
     //console.log(itemAddedDoesNotExist);
 
 
     switch (type) {
-      case Actions.ADD_ITEM_INTO_CART:
-    
+      case Actions.ADD_ITEM_INTO_CART: {
+        console.log(cart);
+        console.log(item);   
+        console.log(filteredCart);
         console.log(state);
-       // console.log(itemsInCart);
         
-       // console.log(itemToBeAdded);
-        //console.log();
-        const item = state.push(itemToBeAdded);
         
-        return [...state, itemToBeAdded];
-        
+        return {
+          ...state,
+          cart: [...filteredCart,item],
+        };
+      }
+      case Actions.REMOVE_ITEM_FROM_CART: {
+        return { 
+          ...state,
+          cart: [...filteredCart]
+        };
+      }
+     
+      default: {
+          return { ...state };
+      }
       
-      case Actions.REMOVE_ITEM_FROM_CART:
-        return [...state, ...itemsLeftInCart];
-      default:
-        return [...state];
     }
-
-  
-
-
-
   }
 
- const [state, dispatch] = useReducer(reducer,itemsInCart);
+  const [state, dispatch] = useReducer(reducer, initCartState);
+  
+  const {cart} = state;
 
   const removeItemFromCart = ({id,name,imgURL}:ItemInCart):void => {
 
@@ -93,22 +99,18 @@ const cartLogic = () => {
       type: Actions.ADD_ITEM_INTO_CART,
       item: { id: id, name: name, imgURL: imgURL }
     });
-    Swal.fire({
-       title: ' success',
-       text: 'Item added into cart!!',
-      timer: 1000,
-      icon: 'success',
-      backdrop: true,
-      background: theme === 'dark' ? '#141728': '#fff',
-    }
-    );
+
+
+
+
+ 
     
-console.log(state.length);
+
 
   } 
  
 
-  return {  state, removeItemFromCart, addItemIntoCart };
+  return { dispatch, cart , removeItemFromCart, addItemIntoCart };
 
 }
 

@@ -1,16 +1,16 @@
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Fade } from "react-reveal";
-
 import { Link } from "react-router-dom";
 import Typed from 'react-typed';
+import { getProducts } from "../api/axiosApi";
 import { arrowRight } from "../assets/icons";
 import { bigShoe1 } from "../assets/images";
 import Button from "../components/Button";
-import { shoes, statistics } from "../constants";
+import { Stat, shoes } from "../constants";
 
 
-   
+const statistics = await getProducts<Stat>("statistics"); 
 
 const Hero = () => {
   const [image, setimage] = useState<string>(bigShoe1);
@@ -18,11 +18,10 @@ const Hero = () => {
   const handleChange = (src: string) => {
     image !== src ? setimage(src) :  setshowBorder(true);
   }
-  const heroRef = useRef(null);
- // const hideSideNav = () =>  heroRef.
+
  
   return (
-     <section ref={heroRef} className='  relative  sm:pl-16 pl-8   sm:pr-16 pr-8   sm:pb-24 pb-12'  id='home'>
+     <section  className='  relative  sm:pl-16 pl-8   sm:pr-16 pr-8   sm:pb-24 pb-12'  id='home'>
  <Fade up  >
       
           <section className="w-full max-w-[1440px]   mx-0 my-auto     flex flex-col max-sm:justify-center  min-h-screen xl:flex-row  gap-10  ">
@@ -30,7 +29,7 @@ const Hero = () => {
           <div className="flex flex-1 justify-start  items-center">
              <p className=" whitespace-nowrap  font-montserrat font-xl text-coral-red ">
            <Typed
-            strings={[' Our Festive  Collections🎇✨']}
+            strings={[' Our Festive Season Collections🎇✨']}
             typeSpeed={40}
            backSpeed={50}
            loop

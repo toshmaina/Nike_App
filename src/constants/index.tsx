@@ -1,29 +1,12 @@
 import { facebook, instagram, shieldTick, support, truckFast, twitter } from "../assets/icons";
 import { bigShoe1, bigShoe2, bigShoe3, customer1, customer2, shoe4, shoe5, shoe6, shoe7, shoeG, thumbnailShoe1, thumbnailShoe2, thumbnailShoe3 } from "../assets/images";
 
-
-import {
-    CustomersReviews,
-    Footer, Hero,
-    Products,
-    Services,
-    SpecialOffer,
-    Subscribe, SuperQuality
-} from "../sections";
-
-
-
-
-
-
-
-
-  interface Stat {
+  export interface Stat {
     value: string;
     label: string;
 }
 
-interface Navlinks {
+export interface Navlinks {
     href: string ;
     label: string;   
 }
@@ -35,63 +18,29 @@ export interface Prducts   {
     price?: string;
     
 }
-interface Services{
+export interface Service{
     imgURL: string;
     label: string;
     subtext: string;
 }
-interface FooterLinks {
+export interface FooterLinks {
     title: string;
     links: {
         name: string;
         link: string;
     }[];
 }
-interface Reviews  {
+export interface Reviews  {
     imgURL: string;
     customerName: string;
     rating: number;
     feedback: string;
 }
-interface SocialMedia {
+export interface SocialMedia {
     src: string;
     alt: string;
 }
-interface Components {
-    path: string;
-    element: JSX.Element;
-}
 
-
-
-export const components:Components[] = [
-    {
-        path: "hero",
-        element: <Hero />
-    },{
-        path: "products",
-        element: <Products/>
-    },{
-        path: "superQuality",
-        element: <SuperQuality />
-    },
-     {
-        path: "specialOffers",
-        element:<SpecialOffer/>
-    },  {
-        path: "services",
-        element: <Services/>
-    },{
-        path: "customersReviews",
-        element: <CustomersReviews/>
-    },
-    {
-        path: "subscribe",
-        element: <Subscribe/>
-    },{
-        path: "footer",
-        element: <Footer/>
-    }]
 export const navLinks: Required<Navlinks[]> = [
     { href: "/", label: "Home"},
     { href: "about-us", label: "About" },
@@ -117,7 +66,7 @@ export const shoes:Record<"thumbnail" | "bigShoe",string>[] = [
 export const ViewProducts:Prducts[] = [
     {
         id:0,
-       imgURL: bigShoe1,
+        imgURL: bigShoe1,
          name: "Nike Air Jordan-01",
         price: "$200.20",
     },
@@ -199,7 +148,7 @@ export const products:Prducts[] = [
     
 ];
 
-export const services:Services[] = [
+export const services:Service[] = [
     {
         imgURL: truckFast,
         label: "Free shipping",

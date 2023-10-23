@@ -13,7 +13,9 @@ import SuperQuality from "./SuperQuality";
 
 
 export {
-    BackToTop, Cart, CustomersReviews,
+    BackToTop,
+    Cart,
+    CustomersReviews,
     Footer,
     Hero,
     Nav,

@@ -2,13 +2,21 @@
 import { ThreeDots } from 'react-loader-spinner';
 import Fade from 'react-reveal/Fade';
 import { Link } from 'react-router-dom';
+import { getProducts } from '../api/axiosApi';
 import DetailsButton from '../components/DetailsButton';
 import loading from '../components/Loading';
 import PopularProductsCard from "../components/PopularProductsCard";
-import { ViewProducts } from "../constants";
+import { Prducts } from '../constants';
+
+ 
+
+
+const  Popular_Products = await getProducts<Prducts>('popularProducts');
 
 const PopularProducts = () => {
-const isLoading = loading();
+  const isLoading:boolean = loading();
+  
+
   return (
     !isLoading
       ?
@@ -25,14 +33,16 @@ const isLoading = loading();
       </div>
      <div className="mt-16 grid lg:grid-cols-4 md-grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-4 gap-10  ">
   {
-            ViewProducts.map(product => (
+              Popular_Products?.map(product => {
+                const dynamicImgURL: string = new URL(`../assets/images/${product.imgURL}`, import.meta.url).href; 
+              return  (
             
       <div key={product.id} className=' flex max-sm:justify-center max-sm:items-center  '>
- <PopularProductsCard imgURL={product.imgURL} id={product.id }  name={product.name} price={product.price}/>
+ <PopularProductsCard imgURL={dynamicImgURL} id={product.id }  name={product.name} price={product.price}/>
    </div>
               
               
- ))
+ )})
       }       
           </div>
            <Link  to="/cart"><DetailsButton title="View Cart" noPadding={false} addToCartButton={false}/></Link>
