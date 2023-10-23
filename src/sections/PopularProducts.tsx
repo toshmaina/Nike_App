@@ -1,25 +1,22 @@
 
-import { ThreeDots } from 'react-loader-spinner';
 import Fade from 'react-reveal/Fade';
 import { Link } from 'react-router-dom';
 import { getProducts } from '../api/axiosApi';
 import DetailsButton from '../components/DetailsButton';
-import loading from '../components/Loading';
 import PopularProductsCard from "../components/PopularProductsCard";
 import { Prducts } from '../constants';
 
  
 
 
-const  Popular_Products = await getProducts<Prducts>('popularProducts');
+const  Popular_Products = await getProducts<Prducts>("popularProducts");
 
 const PopularProducts = () => {
-  const isLoading:boolean = loading();
+ 
   
 
   return (
-    !isLoading
-      ?
+  
       <section className='max-w-[1440px] my-0 mx-auto max-sm:mt-12 sm:px-16 px-8 py-[8rem] max-sm:py-24'>
         <Fade up >
       <div className="flex flex-col justify-start gap-5 ">
@@ -33,16 +30,22 @@ const PopularProducts = () => {
       </div>
      <div className="mt-16 grid lg:grid-cols-4 md-grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-4 gap-10  ">
   {
-              Popular_Products?.map(product => {
+            Popular_Products?.map(product => {
                 const dynamicImgURL: string = new URL(`../assets/images/${product.imgURL}`, import.meta.url).href; 
               return  (
             
       <div key={product.id} className=' flex max-sm:justify-center max-sm:items-center  '>
- <PopularProductsCard imgURL={dynamicImgURL} id={product.id }  name={product.name} price={product.price}/>
+                
+                    
+                  <PopularProductsCard imgURL={dynamicImgURL} showSkeleton={Boolean(product)} id={product.id} name={product.name} price={product.price} />
+                    
+            
    </div>
               
               
- )})
+             )
+            }) 
+     
       }       
           </div>
            <Link  to="/cart"><DetailsButton title="View Cart" noPadding={false} addToCartButton={false}/></Link>
@@ -53,18 +56,7 @@ const PopularProducts = () => {
     
 
 
-      :
-      
-           <div id="spinner" className="flex items-center absolute top-0 right-0 justify-center w-full h-full bg-[#141728]">
-        <ThreeDots 
-          height="80"
-          width="80" 
-          radius="9"
-          color="#4fa94d" 
-          ariaLabel="three-dots-loading"
-          visible={true}
- />
-    </div>
+    
  )
   
    

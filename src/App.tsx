@@ -22,7 +22,7 @@ import Layout from "./sections/Layout";
   export  const CartContext = createContext < null |  CartContextType> (null)
 
 const App = () => {
-   const isLoading = loading();
+   const isLoading = loading(250);
    const theme = useTheme();
 
    const allRoutes = [

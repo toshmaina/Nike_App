@@ -7,13 +7,8 @@ import { FooterLinks, SocialMedia } from "../constants";
 const socialMedia = await getProducts<SocialMedia>("socialMedia"); */
 const [footerLinks, socialMedia] = await  Promise.all([getProducts<FooterLinks>("footLinks"), getProducts<SocialMedia>("socialMedia")]);
 const Footer = () => {
-  return (
-
-
-      
+  return (    
   <section className=' bg-footer bg-cover bg-center bg-no-repeat sm:px-16 px-8 pb-8 sm:pt-24 pt-12' id='contact-us'>
-      
-    
     <footer className=" max-w-[1440px] my-0 mx-auto">
       <div className="flex flex-1 items-start justify-between gap-20 flex-wrap max-lg:flex-col">
         <div className="flex flex-col items-start">
@@ -35,12 +30,12 @@ const Footer = () => {
         </div>
         <div className="flex flex-1 justify-between lg:gap-10 gap-20 flex-wrap">
             {
-              footerLinks.map(footLink => (
+              footerLinks?.map(footLink => (
             <div key={footLink.title} className="text-white ">
               <h4 className="text-white text-2xl font-montserrat leading-normal font-medium mb-6 ">{footLink.title}</h4>
            <ul>   
                     {
-                      footLink?.links?.map(link => (
+                      footLink.links.map(link => (
                 
                 <li key={link.name} className="text-white mt-3  font-medium leading-normal font-montserrat text-base hover:text-slate-gray cursor-pointer ">
                   <Link to={link.link}>{link.name}</Link>

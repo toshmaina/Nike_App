@@ -1,8 +1,7 @@
 import Fade from 'react-reveal/Fade';
 import Typed from 'react-typed';
-import PopularProductsCard from '../components/PopularProductsCard';
-
 import { getProducts } from '../api/axiosApi';
+import PopularProductsCard from '../components/PopularProductsCard';
 import { Prducts } from '../constants';
 
 
@@ -66,7 +65,7 @@ const Products = ({ showProductsOnly }: ProductsOnly) => {
                  <Fade up >
      <div className={` grid ${showProductsOnly ? `lg:grid-cols-2  md:grid-cols-3 sm:grid-cols-2 my-0 mx-auto  p-5   grid-cols-1`:` mt-16  lg:grid-cols-4 md-grid-cols-3 sm:grid-cols-2 grid-cols-1`} sm:gap-4 gap-14`}>
   { 
-                                   products?.map(product => {
+                                   products.map(product => {
                                         const dynamicImgURL: string = new URL(`../assets/images/${product.imgURL}`, import.meta.url).href; 
                return (
       <div key={product.name} className=' flex max-sm:justify-center max-sm:items-center  '>

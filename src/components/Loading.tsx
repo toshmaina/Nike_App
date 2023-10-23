@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 
-const loading = () => {
+const loading = (delay:number) => {
     const [isLoading, setIsLoading] = useState(true);
-  /*  useDebounce(() => setIsLoading(isLoading  => !isLoading),250) */
     useEffect(() => { 
-    const timeOut = setTimeout(() => setIsLoading((isLoading) => !isLoading), 250);
+    const timeOut = setTimeout(() => setIsLoading((isLoading) => !isLoading), delay);
     return () => clearTimeout(timeOut) 
    }, []); 
     return isLoading;
