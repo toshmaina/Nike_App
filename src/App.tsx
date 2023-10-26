@@ -10,6 +10,7 @@ import loading from "./components/Loading";
 import { Prducts } from "./constants";
 import { BackToTop, Nav, PopularProducts } from "./sections";
 import Cart from "./sections/Cart";
+import Contact from "./sections/Contact";
 import Layout from "./sections/Layout";
 
  export  type CartContextType = {
@@ -29,7 +30,8 @@ const App = () => {
       { path: "/", component: <Layout /> },
       { path: "/products", component: <PopularProducts /> },
       { path: "/cart", component: <Cart /> },
-      {path: "/", component:<BackToTop/>}
+      {path: "/", component:<BackToTop/>},
+      {path: "/contact", component:<Contact/>}
    ]
 
 

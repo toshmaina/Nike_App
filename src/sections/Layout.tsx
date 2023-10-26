@@ -1,12 +1,12 @@
 
 
 import {
-  CustomersReviews,
-  Footer, Hero,
-  Products,
-  Services,
-  SpecialOffer,
-  Subscribe, SuperQuality
+    CustomersReviews,
+    Footer, Hero,
+    Products,
+    Services,
+    SpecialOffer,
+    Subscribe, SuperQuality
 } from "../sections";
 
 
@@ -41,7 +41,8 @@ interface Components {
     },{
         path: "footer",
         element: <Footer/>
-    }]
+    }
+    ]
 
 const Layout = () =>  (
 <>                 
