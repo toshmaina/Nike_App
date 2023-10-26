@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-const {nextui} = require("@nextui-org/theme");
+const { nextui } = require("@nextui-org/theme");
 export default {
 	darkMode: "class",
-	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+	content: [
+		"./index.html",
+		"./src/**/*.{js,ts,jsx,tsx}",
+		"./node_modules/@nextui-org/theme/dist/components/(button|snippet|code|input).js",
+	],
 	theme: {
 		fontSize: {
 			xs: ["12px", "16px"],
@@ -39,9 +43,8 @@ export default {
 			screens: {
 				wide: "1440px",
 			},
-			
 		},
 	},
-	
-  plugins: [nextui()],
+
+	plugins: [nextui()],
 };
