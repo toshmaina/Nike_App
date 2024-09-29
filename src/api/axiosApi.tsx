@@ -2,7 +2,7 @@ import axios from "axios";
 import { Prducts } from "../constants";
 
 const productsApi = axios.create({
-    baseURL: "http://localhost:3500/",
+    baseURL: "http://localhost:5000/",
     headers: {
                 "Content-type": "application/json"
             },
