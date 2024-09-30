@@ -3,7 +3,7 @@ import { Tooltip, useScrollTrigger } from '@mui/material';
 import { Classic } from "@theme-toggles/react";
 import "@theme-toggles/react/css/Classic.css";
 import { useTheme } from "next-themes";
-import { ChangeEvent, useCallback, useContext, useMemo, useState } from 'react';
+import {  useCallback, useContext, useMemo, useState } from 'react';
 import { fromLatLng } from "react-geocode";
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillCartPlusFill, BsPinMapFill, BsSearch } from 'react-icons/bs';
@@ -35,10 +35,10 @@ const Nav = () => {
   const toggle = ():void => setToggle(toggle => !toggle); 
 
   const changeTheme = (): void => theme === 'light' ? setTheme("dark") : setTheme("light");
-  const [search, setSearch] = useState("");
+//   const [search, setSearch] = useState("");
   
   
-const handleSearchChange = (e:ChangeEvent<HTMLInputElement>):void => setSearch( e.target.value)
+// const handleSearchChange = (e:ChangeEvent<HTMLInputElement>):void => setSearch( e.target.value)
 
   const showPopUp = (): void => {
     
@@ -105,7 +105,7 @@ const handleSearchChange = (e:ChangeEvent<HTMLInputElement>):void => setSearch( 
                        <button  className={`${!isScrolling && theme === 'light' ? 'text-purple-900 ': 'text-coral-red'  } relative `}>
                      <Link to="/cart" className={` ${itemCount ? 'after:absolute':'after:hidden'}    after:content-['6'] after:bottom-2.5 after:left-3  after:w-[24px]  after:bg-coral-red  after:rounded-full    flex items-center justify-center`}><BsFillCartPlusFill/> </Link> 
                     </button>
-                    <Classic className={ `${!isScrolling && theme === 'light' ? 'text-purple-900': 'text-white'  } `} reversed toggled={isToggled} toggle={toggle} onToggle={changeTheme} /> 
+                    <Classic onPointerLeaveCapture onPointerEnterCapture placeholder className={ `${!isScrolling && theme === 'light' ? 'text-purple-900': 'text-white'  } `} reversed toggled={isToggled} toggle={toggle} onToggle={changeTheme} /> 
                      <button onClick={getAddress} className={`${!isScrolling && theme === 'light' ? 'text-purple-900 ': 'text-white'  } `}>
                       <BsPinMapFill/>
                     </button>

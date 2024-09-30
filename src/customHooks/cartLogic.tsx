@@ -1,4 +1,3 @@
-import { useTheme } from "@emotion/react";
 import { useReducer } from "react";
 import Swal from "sweetalert2";
 
@@ -24,7 +23,7 @@ import Swal from "sweetalert2";
 
 
 const cartLogic = () => {
-  const theme = useTheme()
+  //const theme = useTheme()
 
   type itemsInCartType = {
     cart: Array<ItemInCart>
@@ -43,7 +42,7 @@ const cartLogic = () => {
     const filteredCart: Array<ItemInCart> = cart.length ? cart.filter(item => item.id !== id) : cart;
   
       
-    const itemAddedDoesNotExist: boolean = !cart.includes(item);
+    //const itemAddedDoesNotExist: boolean = !cart.includes(item);
     //console.log(itemAddedDoesNotExist);
 
 

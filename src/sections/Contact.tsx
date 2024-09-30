@@ -1,5 +1,4 @@
 import emailjs from '@emailjs/browser';
-import { useTheme } from 'next-themes';
 import { FormEvent, useRef } from 'react';
 import Swal from 'sweetalert2';
 
@@ -7,7 +6,6 @@ import Swal from 'sweetalert2';
 
 
 const Contact = () => {
-  const theme = useTheme()
 
     const form = useRef<null | HTMLFormElement>(null);
 

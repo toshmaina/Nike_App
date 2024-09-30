@@ -12,8 +12,8 @@ import loading from "./Loading";
 
 
 export type AllCardProps = Prducts &   {addItemIntoCart : ({name,id,imgURL,price}: Prducts) => void}; 
-type CardWithSkeleton = Prducts & {showSkeleton?: boolean}
-const PopularProductsCard = ({ imgURL, name, price,id,showSkeleton }:CardWithSkeleton) => {
+type CardWithSkeleton = Prducts 
+const PopularProductsCard = ({ imgURL, name, price,id }:CardWithSkeleton) => {
   
   const isLoading:boolean = loading(5000);
   const [rating, setRating] = useState<number | null>(null);

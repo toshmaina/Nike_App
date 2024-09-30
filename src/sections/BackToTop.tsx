@@ -1,4 +1,4 @@
-import { useScrollTrigger } from "@mui/material";
+
 import { VscChevronUp } from "react-icons/vsc";
 import Fade from 'react-reveal/Fade';
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
   
 const BackToTop = () => {
-  const isScrolling = useScrollTrigger();
+  //const isScrolling = useScrollTrigger();
 
     return (
     <>

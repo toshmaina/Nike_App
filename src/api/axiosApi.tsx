@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Prducts } from "../constants";
+
 
 const productsApi = axios.create({
     baseURL: "http://localhost:5000/",
@@ -31,15 +31,15 @@ const [error, setError] = useState<string>(""); */
 };
    
 
-type GetProducts = Awaited<ReturnType < typeof getProducts >>
+//type GetProducts = Awaited<ReturnType < typeof getProducts >>
     
 
-export const postProducts = async (product:Prducts,urlEndPoint:string) => {
+/* export const postProducts = async (product:Prducts,urlEndPoint:string) => {
     const response = await productsApi.post(urlEndPoint, product);
     
 
     
-}
+} */
 
 
 export const updateProducts = async () => {

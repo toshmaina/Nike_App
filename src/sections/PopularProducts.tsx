@@ -37,7 +37,7 @@ const PopularProducts = () => {
       <div key={product.id} className=' flex max-sm:justify-center max-sm:items-center  '>
                 
                     
-                  <PopularProductsCard imgURL={dynamicImgURL} showSkeleton={Boolean(product)} id={product.id} name={product.name} price={product.price} />
+                  <PopularProductsCard imgURL={dynamicImgURL}  id={product.id} name={product.name} price={product.price} />
                     
             
    </div>
